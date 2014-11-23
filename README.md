@@ -35,4 +35,9 @@ MIT
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## Thanks to the following
+
+* [gulp-csslint](https://github.com/lazd/gulp-csslint)
+* [broccoli-jshint](https://github.com/rwjblue/broccoli-jshint)
+
 Crafted with <3 by [John Otander](http://johnotander.com) ([@4lpine](https://twitter.com/4lpine)).
