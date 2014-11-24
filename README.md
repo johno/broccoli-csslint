@@ -37,7 +37,7 @@ MIT
 
 ## Thanks to the following
 
-* [gulp-csslint](https://github.com/lazd/gulp-csslint)
-* [broccoli-jshint](https://github.com/rwjblue/broccoli-jshint)
+* [gulp-csslint](https://github.com/lazd/gulp-csslint): Used as a reference for CSSLint.
+* [broccoli-jshint](https://github.com/rwjblue/broccoli-jshint): Adapted this plugin's code for csslinting.
 
 Crafted with <3 by [John Otander](http://johnotander.com) ([@4lpine](https://twitter.com/4lpine)).

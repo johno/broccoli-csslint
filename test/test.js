@@ -1,5 +1,3 @@
-// Adapted from https://github.com/rwjblue/broccoli-jshint/blob/master/tests/index.js
-
 'use strict';
 
 var cssLint = require('..');
@@ -7,7 +5,6 @@ var expect = require('expect.js');
 var fs = require('fs');
 var broccoli = require('broccoli');
 var root = process.cwd();
-
 
 describe('broccoli-csslint', function() {
   var loggerOutput;

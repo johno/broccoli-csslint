@@ -1,5 +1,3 @@
-// Adapted from https://github.com/rwjblue/broccoli-jshint/blob/master/index.js
-
 'use strict';
 
 var csslint = require('csslint').CSSLint;
