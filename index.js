@@ -46,7 +46,6 @@ CSSLinter.prototype.write = function (readTree, destDir) {
   })
   .finally(function() {
     if (self._errors.length > 0) {
-      console.log(self._errors);
       var label = ' CSSLint Error' + (self._errors.length > 1 ? 's' : '')
       console.log('\n' + self._errors.join('\n'));
       console.log(chalk.yellow('===== ' + self._errors.length + label + '\n'));
@@ -58,17 +57,23 @@ CSSLinter.prototype.processString = function (content, relativePath) {
   var report = csslint.verify(content, this.csslintrc);
   var errors = this.processMessages(relativePath, report.messages);
 
-  console.log(report);
-
   if (report.messages.length > 0) {
     this.logError(errors);
   }
 };
 
 CSSLinter.prototype.processMessages = function (file, messages) {
-  return messages.map(function() {
-    // ...
-  });
+  var len = messages.length
+
+  if (len == 0) {
+    return '';
+  }
+
+  var messageStr = messages.map(function(message, i) {
+    return file + ': line ' + message.line + ', col ' + message.col + ', ' + message.message;
+  }).join();
+
+  return messageStr + '\n' + len + ' error' + ((len === 1) ? '' : 's');
 }
 
 CSSLinter.prototype.logError = function(message, color) {
@@ -117,10 +122,10 @@ CSSLinter.prototype.getConfig = function(rootPath) {
 };
 
 CSSLinter.prototype.stripComments = function(string) {
-  string = string || "";
+  string = string || '';
 
-  string = string.replace(/\/\*(?:(?!\*\/)[\s\S])*\*\//g, "");
-  string = string.replace(/\/\/[^\n\r]*/g, ""); // Everything after '//'
+  string = string.replace(/\/\*(?:(?!\*\/)[\s\S])*\*\//g, '');
+  string = string.replace(/\/\/[^\n\r]*/g, ''); // Everything after '//'
 
   return string;
 };

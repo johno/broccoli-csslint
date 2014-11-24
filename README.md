@@ -12,15 +12,13 @@ npm i broccoli-csslint
 
 ```javascript
 var cssLint = require('broccoli-csslint');
-
 var tree = cssLint(someTree);
 ```
 
 ## Development
 
 ```
-npm i
-npm t
+npm i && npm t
 ```
 
 ## License
