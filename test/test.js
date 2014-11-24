@@ -62,11 +62,12 @@ describe('broccoli-csslint', function() {
     });
   });
 
-  it('uses the specified csslintrc', function() {
+  it('uses the specified csslintrc, even if it is an ancestor directory', function() {
     var sourcePath = 'test/fixtures/css-file-that-uses-important';
     chdir(sourcePath);
 
-    var tree = cssLint('..', {
+    var tree = cssLint('.', {
+      csslintrcRoot: '..',
       logError: function(message) { loggerOutput.push(message) }
     });
 

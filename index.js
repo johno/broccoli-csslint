@@ -21,7 +21,7 @@ function CSSLinter(inputTree, options) {
   options = options || {};
 
   this.inputTree = inputTree;
-  this.log       = true;
+  this.log = true;
 
   for (var key in options) {
     if (options.hasOwnProperty(key)) {
