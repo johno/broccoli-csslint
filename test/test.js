@@ -57,9 +57,22 @@ describe('broccoli-csslint', function() {
 
     builder = new broccoli.Builder(tree);
     return builder.build().then(function() {
-      console.log(loggerOutput);
       expect(loggerOutput.join('\n')).to.match(/error/);
       expect(loggerOutput.join('\n')).to.match(/important/);
+    });
+  });
+
+  it('uses the specified csslintrc', function() {
+    var sourcePath = 'test/fixtures/css-file-that-uses-important';
+    chdir(sourcePath);
+
+    var tree = cssLint('..', {
+      logError: function(message) { loggerOutput.push(message) }
+    });
+
+    builder = new broccoli.Builder(tree);
+    return builder.build().then(function() {
+      expect(loggerOutput.join('\n')).to.not.match(/error/);
     });
   });
 });
