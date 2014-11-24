@@ -76,7 +76,6 @@ CSSLinter.prototype.processMessages = function (file, messages) {
 
 CSSLinter.prototype.logError = function(message, color) {
   color = color || 'red';
-
   this._errors.push(chalk[color](message) + "\n");
 };
 
@@ -101,14 +100,12 @@ CSSLinter.prototype.getConfig = function(rootPath) {
     }
   }
 
-  // Build a list of all available rules
   csslint.getRules().forEach(function(rule) {
     ruleset[rule.id] = 1;
   });
 
   for (var rule in lintOptions) {
     if (!lintOptions[rule]) {
-      // Remove rules that are turned off
       delete ruleset[rule];
     }
     else {
@@ -124,13 +121,6 @@ CSSLinter.prototype.stripComments = function(string) {
 
   string = string.replace(/\/\*(?:(?!\*\/)[\s\S])*\*\//g, '');
   string = string.replace(/\/\/[^\n\r]*/g, ''); // Everything after '//'
-
-  return string;
-};
-
-CSSLinter.prototype.escapeErrorString = function(string) {
-  string = string.replace(/\n/gi, "\\n");
-  string = string.replace(/'/gi, "\\'");
 
   return string;
 };
