@@ -59,6 +59,22 @@ describe('broccoli-csslint', function() {
     });
   });
 
+  it('should pluralize the error string when there are multiple errors', function() {
+    var sourcePath = 'test/fixtures/css-file-with-multiple-errors';
+    chdir(sourcePath);
+
+    var tree = cssLint('.', {
+      logError: function(message) { loggerOutput.push(message) }
+    });
+
+    builder = new broccoli.Builder(tree);
+    return builder.build().then(function() {
+      expect(loggerOutput.join('\n')).to.match(/errors/);
+      expect(loggerOutput.join('\n')).to.match(/empty/);
+      expect(loggerOutput.join('\n')).to.match(/important/);
+    });
+  });
+
   it('uses the specified csslintrc, even if it is an ancestor directory', function() {
     var sourcePath = 'test/fixtures/css-file-that-uses-important';
     chdir(sourcePath);

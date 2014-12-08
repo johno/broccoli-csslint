@@ -44,7 +44,7 @@ CSSLinter.prototype.write = function (readTree, destDir) {
   })
   .finally(function() {
     if (self._errors.length > 0) {
-      var label = ' CSSLint Error' + (self._errors.length > 1 ? 's' : '')
+      var label = ' Files with CSSLint Errors';
       console.log('\n' + self._errors.join('\n'));
       console.log(chalk.yellow('===== ' + self._errors.length + label + '\n'));
     }
