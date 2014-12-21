@@ -89,4 +89,19 @@ describe('broccoli-csslint', function() {
       expect(loggerOutput.join('\n')).to.not.match(/error/);
     });
   });
+
+it('excludes files that are not meant to be a part of builds', function() {
+    var sourcePath = 'test/fixtures/css-files-that-need-to-be-ignored';
+    chdir(sourcePath);
+
+    var tree = cssLint('.', {
+      logError: function(message) { loggerOutput.push(message) }
+    });
+
+    builder = new broccoli.Builder(tree);
+    return builder.build().then(function() {
+      expect(loggerOutput.join('\n')).to.not.match(/error/);
+    });
+  });
+
 });
