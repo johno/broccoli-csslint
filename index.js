@@ -52,6 +52,13 @@ CSSLinter.prototype.write = function (readTree, destDir) {
 }
 
 CSSLinter.prototype.processString = function (content, relativePath) {
+
+  var filesToExclude =  this.csslintrc['excluded-files'];
+
+  if(filesToExclude && filesToExclude.indexOf(relativePath) !== -1) {
+    return;
+  }
+
   var report = csslint.verify(content, this.csslintrc);
   var errors = this.processMessages(relativePath, report.messages);
 
