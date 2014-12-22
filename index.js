@@ -56,7 +56,7 @@ CSSLinter.prototype.processString = function (content, relativePath) {
   var filesToExclude =  this.csslintrc['exclude-list'];
 
   if(filesToExclude && filesToExclude.indexOf(relativePath) !== -1) {
-    return;
+    return content;
   }
 
   var report = csslint.verify(content, this.csslintrc);
