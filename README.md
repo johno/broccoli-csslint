@@ -16,6 +16,9 @@ npm i broccoli-csslint
 var cssLint = require('broccoli-csslint');
 var tree = cssLint(someTree);
 ```
+For linting options refer to the official (CSSLint)[https://github.com/CSSLint/csslint/wiki/Rules-by-ID] documentation
+
+Additionally this plugin provides the ability to define **exclude-list** in the .csslintrc file
 
 ## Development
 
