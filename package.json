@@ -1,6 +1,6 @@
 {
   "name": "broccoli-csslint",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Add CSS linting to your Broccoli tree.",
   "main": "index.js",
   "directories": {
