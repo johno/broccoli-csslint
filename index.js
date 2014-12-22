@@ -65,6 +65,9 @@ CSSLinter.prototype.processString = function (content, relativePath) {
   if (report.messages.length > 0) {
     this.logError(errors);
   }
+
+  return content;
+
 };
 
 CSSLinter.prototype.processMessages = function (file, messages) {
