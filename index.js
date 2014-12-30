@@ -79,7 +79,7 @@ CSSLinter.prototype.processMessages = function (file, messages) {
 
   var messageStr = messages.map(function(message, i) {
     return file + ': line ' + message.line + ', col ' + message.col + ', ' + message.message;
-  }).join();
+  }).join('\n');
 
   return messageStr + '\n' + len + ' error' + ((len === 1) ? '' : 's');
 }
