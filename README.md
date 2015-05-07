@@ -1,6 +1,4 @@
-# Broccoli CSSLint
-
-[![Build Status](https://travis-ci.org/johnotander/broccoli-csslint.svg?branch=master)](https://travis-ci.org/johnotander/broccoli-csslint)
+# broccoli-csslint [![Build Status](https://travis-ci.org/johnotander/broccoli-csslint.svg?branch=master)](https://travis-ci.org/johnotander/broccoli-csslint)
 
 Add CSS linting to your [Broccoli](https://github.com/broccolijs/broccoli) tree.
 
@@ -19,7 +17,9 @@ var tree = cssLint(someTree);
 
 For linting options refer to the official [CSSLint](https://github.com/CSSLint/csslint/wiki/Rules-by-ID) documentation.
 
-Additionally, this plugin provides the ability to define **exclude-list** in the .csslintrc file.
+### Excluding files
+
+Additionally this plugin provides the ability to define **exclude-list** in the .csslintrc file.
 
 ## Development
 
