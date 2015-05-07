@@ -30,6 +30,19 @@ describe('broccoli-csslint', function() {
     }
   });
 
+  it('can handle an empty file', function() {
+    var sourcePath = 'test/fixtures/empty';
+    chdir(sourcePath);
+    var tree = cssLint('.', {
+      logError: function(message) { loggerOutput.push(message) }
+    });
+
+    builder = new broccoli.Builder(tree);
+    return builder.build().then(function() {
+      expect(loggerOutput.length).to.equal(0);
+    });
+  });
+
   it('uses the csslintrc as configuration for linting', function() {
     var sourcePath = 'test/fixtures/valid-css-file';
     chdir(sourcePath);
@@ -103,5 +116,4 @@ it('excludes files that are not meant to be a part of builds', function() {
       expect(loggerOutput.join('\n')).to.not.match(/error/);
     });
   });
-
 });
