@@ -7,6 +7,7 @@ var chalk = require('chalk');
 var fs = require('fs');
 var findup = require('findup-sync');
 var mkdirp = require('mkdirp');
+var isPresent = require('is-present');
 
 CSSLinter.prototype = Object.create(Filter.prototype);
 CSSLinter.prototype.constructor = CSSLinter;
@@ -52,7 +53,6 @@ CSSLinter.prototype.write = function (readTree, destDir) {
 }
 
 CSSLinter.prototype.processString = function (content, relativePath) {
-
   var filesToExclude =  this.csslintrc['exclude-list'];
 
   if(filesToExclude && filesToExclude.indexOf(relativePath) !== -1) {
@@ -62,16 +62,19 @@ CSSLinter.prototype.processString = function (content, relativePath) {
   var report = csslint.verify(content, this.csslintrc);
   var errors = this.processMessages(relativePath, report.messages);
 
+  report.messages = report.messages.filter(function(message) {
+    return isPresent(message.line) && isPresent(message.col);
+  });
+
   if (report.messages.length > 0) {
     this.logError(errors);
   }
 
   return content;
-
 };
 
 CSSLinter.prototype.processMessages = function (file, messages) {
-  var len = messages.length
+  var len = messages.length;
 
   if (len == 0) {
     return '';
