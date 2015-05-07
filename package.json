@@ -1,6 +1,6 @@
 {
   "name": "broccoli-csslint",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Add CSS linting to your Broccoli tree.",
   "main": "index.js",
   "directories": {
@@ -16,7 +16,10 @@
   "keywords": [
     "broccoli-plugin",
     "css",
-    "csslint"
+    "csslint",
+    "csshint",
+    "lint",
+    "hint"
   ],
   "author": "John Otander <johnotander@gmail.com> (http://johnotander.com/)",
   "license": "MIT",
