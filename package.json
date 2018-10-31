@@ -28,16 +28,15 @@
   },
   "homepage": "https://github.com/johnotander/broccoli-csslint",
   "devDependencies": {
-    "broccoli": "^0.16.2",
+    "broccoli": "^2.0.1",
     "expect.js": "^0.3.1",
-    "mocha": "^2.2.4"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
-    "broccoli-filter": "^0.1.14",
-    "chalk": "^1.0.0",
+    "broccoli-filter": "^1.3.0",
+    "chalk": "^2.4.1",
     "csslint": "^1.0.5",
-    "findup-sync": "^0.2.1",
-    "is-present": "0.0.1",
-    "mkdirp": "^0.5.0"
+    "findup-sync": "^2.0.0",
+    "is-present": "^1.0.0"
   }
 }

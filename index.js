@@ -6,20 +6,22 @@ var path = require('path');
 var chalk = require('chalk');
 var fs = require('fs');
 var findup = require('findup-sync');
-var mkdirp = require('mkdirp');
 var isPresent = require('is-present');
 
 CSSLinter.prototype = Object.create(Filter.prototype);
 CSSLinter.prototype.constructor = CSSLinter;
 
-function CSSLinter(inputTree, options) {
+function CSSLinter(inputNode, options) {
   if (!(this instanceof CSSLinter)) {
-    return new CSSLinter(inputTree, options);
+    return new CSSLinter(inputNode, options);
   }
 
   options = options || {};
 
-  this.inputTree = inputTree;
+  Filter.call(this, inputNode, {
+    annotation: options.annotation
+  });
+
   this.log = true;
 
   for (var key in options) {
@@ -31,26 +33,23 @@ function CSSLinter(inputTree, options) {
 
 CSSLinter.prototype.extensions = ['css'];
 
-CSSLinter.prototype.write = function (readTree, destDir) {
-  var self = this
+CSSLinter.prototype.build = function () {
+  var self = this;
   self._errors = [];
 
-  return readTree(this.inputTree).then(function (srcDir) {
-    if (!self.csslintrc) {
-      var csslintrcPath = self.csslintrcPath || path.join(srcDir, self.csslintrcRoot || '');
-      self.csslintrc = self.getConfig(csslintrcPath);
-    }
+  var srcDir = this.inputPaths[0];
+  var csslintrcPath = path.join(srcDir, this.csslintrcRoot || '');
+  this.csslintrc = this.getConfig(csslintrcPath);
 
-    return Filter.prototype.write.call(self, readTree, destDir)
-  })
-  .finally(function() {
-    if (self._errors.length > 0) {
-      var label = ' Files with CSSLint Errors';
-      console.log('\n' + self._errors.join('\n'));
-      console.log(chalk.yellow('===== ' + self._errors.length + label + '\n'));
-    }
-  });
-}
+  return Filter.prototype.build.apply(this, arguments)
+    .finally(function() {
+      if (self._errors.length > 0) {
+        var label = ' Files with CSSLint Errors';
+        console.log('\n' + self._errors.join('\n'));
+        console.log(chalk.yellow('===== ' + self._errors.length + label + '\n'));
+      }
+    });
+};
 
 CSSLinter.prototype.processString = function (content, relativePath) {
   var filesToExclude =  this.csslintrc['exclude-list'];
@@ -85,7 +84,7 @@ CSSLinter.prototype.processMessages = function (file, messages) {
   }).join('\n');
 
   return messageStr + '\n' + len + ' error' + ((len === 1) ? '' : 's');
-}
+};
 
 CSSLinter.prototype.logError = function(message, color) {
   color = color || 'red';
@@ -118,11 +117,13 @@ CSSLinter.prototype.getConfig = function(rootPath) {
   });
 
   for (var rule in lintOptions) {
-    if (!lintOptions[rule]) {
-      delete ruleset[rule];
-    }
-    else {
-      ruleset[rule] = lintOptions[rule];
+    if (lintOptions.hasOwnProperty(rule)) {
+      if (!lintOptions[rule]) {
+        delete ruleset[rule];
+      }
+      else {
+        ruleset[rule] = lintOptions[rule];
+      }
     }
   }
 
