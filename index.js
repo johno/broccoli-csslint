@@ -45,8 +45,7 @@ CSSLinter.prototype.build = function () {
   var self = this;
   self._errors = [];
 
-  var srcDir = this.inputPaths[0];
-  var csslintrcPath = path.join(srcDir, this.csslintrcRoot || '');
+  var csslintrcPath = this.csslintrcRoot || process.cwd();
   this.csslintrc = this.getConfig(csslintrcPath);
 
   return Filter.prototype.build.apply(this, arguments)
