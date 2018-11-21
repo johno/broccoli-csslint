@@ -1,7 +1,7 @@
 'use strict';
 
 var csslint = require('csslint').CSSLint;
-var Filter = require('broccoli-filter');
+var Filter = require('broccoli-persistent-filter');
 var path = require('path');
 var chalk = require('chalk');
 var fs = require('fs');
@@ -17,9 +17,13 @@ function CSSLinter(inputNode, options) {
   }
 
   options = options || {};
+  if (!options.hasOwnProperty('persist')) {
+    options.persist = true;
+  }
 
   Filter.call(this, inputNode, {
-    annotation: options.annotation
+    annotation: options.annotation,
+    persist: options.persist
   });
 
   this.log = true;
@@ -29,6 +33,10 @@ function CSSLinter(inputNode, options) {
       this[key] = options[key]
     }
   }
+};
+
+CSSLinter.prototype.baseDir = function() {
+  return __dirname;
 };
 
 CSSLinter.prototype.extensions = ['css'];
