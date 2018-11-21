@@ -2,7 +2,6 @@
 
 var csslint = require('csslint').CSSLint;
 var Filter = require('broccoli-persistent-filter');
-var path = require('path');
 var chalk = require('chalk');
 var fs = require('fs');
 var findup = require('findup-sync');
