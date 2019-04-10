@@ -30,13 +30,13 @@
   "devDependencies": {
     "broccoli": "^2.0.1",
     "expect.js": "^0.3.1",
-    "mocha": "^5.2.0"
+    "mocha": "^6.1.2"
   },
   "dependencies": {
     "broccoli-persistent-filter": "^2.1.1",
     "chalk": "^2.4.1",
     "csslint": "^1.0.5",
-    "findup-sync": "^2.0.0",
+    "findup-sync": "^3.0.0",
     "is-present": "^1.0.0"
   }
 }
