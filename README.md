@@ -1,4 +1,4 @@
-# broccoli-csslint [![Build Status](https://travis-ci.org/johnotander/broccoli-csslint.svg?branch=master)](https://travis-ci.org/johnotander/broccoli-csslint)
+# broccoli-csslint [![Build Status](https://travis-ci.org/johno/broccoli-csslint.svg?branch=master)](https://travis-ci.org/johno/broccoli-csslint)
 
 Add CSS linting to your [Broccoli](https://github.com/broccolijs/broccoli) tree.
 
