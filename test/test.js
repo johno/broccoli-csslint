@@ -1,6 +1,6 @@
 'use strict';
 
-var cssLint = require('..');
+var CSSLinter = require('..');
 var expect = require('expect.js');
 var fs = require('fs');
 var broccoli = require('broccoli');
@@ -33,7 +33,7 @@ describe('broccoli-csslint', function() {
   it('can handle an empty file', function() {
     var sourcePath = 'test/fixtures/empty';
     chdir(sourcePath);
-    var tree = cssLint('.', {
+    var tree = new CSSLinter('.', {
       logError: function(message) { loggerOutput.push(message) }
     });
 
@@ -47,7 +47,7 @@ describe('broccoli-csslint', function() {
     var sourcePath = 'test/fixtures/valid-css-file';
     chdir(sourcePath);
 
-    var tree = cssLint('.', {
+    var tree = new CSSLinter('.', {
       logError: function(message) { loggerOutput.push(message) }
     });
 
@@ -61,7 +61,7 @@ describe('broccoli-csslint', function() {
     var sourcePath = 'test/fixtures/css-file-that-uses-important';
     chdir(sourcePath);
 
-    var tree = cssLint('.', {
+    var tree = new CSSLinter('.', {
       logError: function(message) { loggerOutput.push(message) }
     });
 
@@ -76,7 +76,7 @@ describe('broccoli-csslint', function() {
     var sourcePath = 'test/fixtures/css-file-with-multiple-errors';
     chdir(sourcePath);
 
-    var tree = cssLint('.', {
+    var tree = new CSSLinter('.', {
       logError: function(message) { loggerOutput.push(message) }
     });
 
@@ -92,7 +92,7 @@ describe('broccoli-csslint', function() {
     var sourcePath = 'test/fixtures/css-file-that-uses-important';
     chdir(sourcePath);
 
-    var tree = cssLint('.', {
+    var tree = new CSSLinter('.', {
       csslintrcRoot: '..',
       logError: function(message) { loggerOutput.push(message) }
     });
@@ -107,7 +107,7 @@ it('excludes files that are not meant to be a part of builds', function() {
     var sourcePath = 'test/fixtures/css-files-that-need-to-be-ignored';
     chdir(sourcePath);
 
-    var tree = cssLint('.', {
+    var tree = new CSSLinter('.', {
       logError: function(message) { loggerOutput.push(message) }
     });
 
